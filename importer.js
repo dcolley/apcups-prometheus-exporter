@@ -218,11 +218,11 @@ export class ApcUpsImporter {
     // lotrans: { value: 176, unit: 'Volts' },
     lines.push(`# HELP ${this.config.prefix}_lotrans The line voltage below which the UPS will switch to batteries.`)
     lines.push(`# TYPE ${this.config.prefix}_lotrans gauge`)
-    lines.push(this.makeUnitLine('maxtime', parsed.maxtime, parsed.upsname, parsed.hostname))
+    lines.push(this.makeUnitLine('maxtime', parsed._lotrans, parsed.upsname, parsed.hostname))
     // hitrans: { value: 288, unit: 'Volts' },
     lines.push(`# HELP ${this.config.prefix}_hitrans The line voltage below which the UPS will switch to mains.`)
     lines.push(`# TYPE ${this.config.prefix}_hitrans gauge`)
-    lines.push(this.makeUnitLine('lotrans', parsed.lotrans, parsed.upsname, parsed.hostname))
+    lines.push(this.makeUnitLine('hitrans', parsed.hitrans, parsed.upsname, parsed.hostname))
     // alarmdel: 'No alarm', // The delay period for the UPS alarm.
     // battv: { value: 27.3, unit: 'Volts' },
     lines.push(`# HELP ${this.config.prefix}_battv Battery voltage as supplied by the UPS.`)
