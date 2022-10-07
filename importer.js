@@ -181,52 +181,52 @@ export class ApcUpsImporter {
     lines.push(`${this.config.prefix}_starttime{upsname="${parsed.upsname}", hostname="${parsed.hostname}"} ${parsed.starttime.valueOf()}`)
     // status: 'ONLINE',
     lines.push(`# HELP ${this.config.prefix}_status The current status of the UPS (ONLINE, ONBATT, etc.)`)
-    lines.push(`# TYPE ${this.config.prefix}_status guage`)
+    lines.push(`# TYPE ${this.config.prefix}_status gauge`)
     lines.push(`${this.config.prefix}_online{status="${parsed.status}", upsname="${parsed.upsname}", hostname="${parsed.hostname}"} ${statusLookup[parsed.status]}`)
     // linev: { value: 233, unit: 'Volts' },
     lines.push(`# HELP ${this.config.prefix}_linev The current line voltage as returned by the UPS.`)
-    lines.push(`# TYPE ${this.config.prefix}_linev guage`)
+    lines.push(`# TYPE ${this.config.prefix}_linev gauge`)
     lines.push(this.makeUnitLine('linev', parsed.linev, parsed.upsname, parsed.hostname))
     // loadpct: { value: 1, unit: 'Percent' },
     lines.push(`# HELP ${this.config.prefix}_loadpct The percentage of load capacity as estimated by the UPS.`)
-    lines.push(`# TYPE ${this.config.prefix}_loadpct guage`)
+    lines.push(`# TYPE ${this.config.prefix}_loadpct gauge`)
     lines.push(this.makeUnitLine('loadpct', parsed.loadpct, parsed.upsname, parsed.hostname))
     // bcharge: { value: 98, unit: 'Percent' },
     lines.push(`# HELP ${this.config.prefix}_bcharge The percentage charge on the batteries.`)
-    lines.push(`# TYPE ${this.config.prefix}_bcharge guage`)
+    lines.push(`# TYPE ${this.config.prefix}_bcharge gauge`)
     lines.push(this.makeUnitLine('bcharge', parsed.bcharge, parsed.upsname, parsed.hostname))
     // timeleft: { value: 296.9, unit: 'Minutes' },
     lines.push(`# HELP ${this.config.prefix}_timeleft The remaining runtime left on batteries as estimated by the UPS.`)
-    lines.push(`# TYPE ${this.config.prefix}_timeleft guage`)
+    lines.push(`# TYPE ${this.config.prefix}_timeleft gauge`)
     lines.push(this.makeUnitLine('timeleft', parsed.timeleft, parsed.upsname, parsed.hostname))
     // mbattchg: { value: 30, unit: 'Percent' },
     lines.push(`# HELP ${this.config.prefix}_mbattchg If the battery charge percentage (BCHARGE) drops below this value, apcupsd will shutdown your system (%).`)
-    lines.push(`# TYPE ${this.config.prefix}_mbattchg guage`)
+    lines.push(`# TYPE ${this.config.prefix}_mbattchg gauge`)
     lines.push(this.makeUnitLine('mbattchg', parsed.mbattchg, parsed.upsname, parsed.hostname))
     // mintimel: { value: 10, unit: 'Minutes' },
     lines.push(`# HELP ${this.config.prefix}_mintimel apcupsd will shutdown your system if the remaining runtime equals or is below this point (minutes).`)
-    lines.push(`# TYPE ${this.config.prefix}_mintimel guage`)
+    lines.push(`# TYPE ${this.config.prefix}_mintimel gauge`)
     lines.push(this.makeUnitLine('mintimel', parsed.mintimel, parsed.upsname, parsed.hostname))
     // maxtime: { value: 0, unit: 'Seconds' },
     lines.push(`# HELP ${this.config.prefix}_maxtime apcupsd will shutdown your system if the time on batteries exceeds this value (minutes).`)
-    lines.push(`# TYPE ${this.config.prefix}_maxtime guage`)
+    lines.push(`# TYPE ${this.config.prefix}_maxtime gauge`)
     lines.push(this.makeUnitLine('maxtime', parsed.maxtime, parsed.upsname, parsed.hostname))
     // sense: 'Medium',
     lines.push(`# HELP ${this.config.prefix}_sense The sensitivity level of the UPS to line voltage fluctuations {Low: 0, Medium: 1, High: 2}.`)
-    lines.push(`# TYPE ${this.config.prefix}_sense guage`)
+    lines.push(`# TYPE ${this.config.prefix}_sense gauge`)
     lines.push(`${this.config.prefix}_sense{sensitivity="${parsed.sense}", upsname="${parsed.upsname}", hostname="${parsed.hostname}"} ${sensitivityLookup[parsed.sense]}`)
     // lotrans: { value: 176, unit: 'Volts' },
     lines.push(`# HELP ${this.config.prefix}_lotrans The line voltage below which the UPS will switch to batteries.`)
-    lines.push(`# TYPE ${this.config.prefix}_lotrans guage`)
+    lines.push(`# TYPE ${this.config.prefix}_lotrans gauge`)
     lines.push(this.makeUnitLine('maxtime', parsed.maxtime, parsed.upsname, parsed.hostname))
     // hitrans: { value: 288, unit: 'Volts' },
     lines.push(`# HELP ${this.config.prefix}_hitrans The line voltage below which the UPS will switch to mains.`)
-    lines.push(`# TYPE ${this.config.prefix}_hitrans guage`)
+    lines.push(`# TYPE ${this.config.prefix}_hitrans gauge`)
     lines.push(this.makeUnitLine('lotrans', parsed.lotrans, parsed.upsname, parsed.hostname))
     // alarmdel: 'No alarm', // The delay period for the UPS alarm.
     // battv: { value: 27.3, unit: 'Volts' },
     lines.push(`# HELP ${this.config.prefix}_battv Battery voltage as supplied by the UPS.`)
-    lines.push(`# TYPE ${this.config.prefix}_battv guage`)
+    lines.push(`# TYPE ${this.config.prefix}_battv gauge`)
     lines.push(this.makeUnitLine('battv', parsed.battv, parsed.upsname, parsed.hostname))
     // lastxfer: 'Low line voltage',
     // numxfers: 0,
@@ -243,7 +243,7 @@ export class ApcUpsImporter {
     lines.push(this.makeUnitLine('cumonbatt', parsed.cumonbatt, parsed.upsname, parsed.hostname))
     // xoffbatt: 'N/A',
     lines.push(`# HELP ${this.config.prefix}_xoffbatt Time and date of last transfer from batteries, or 0='N/A'.`)
-    lines.push(`# TYPE ${this.config.prefix}_xoffbatt guage`)
+    lines.push(`# TYPE ${this.config.prefix}_xoffbatt gauge`)
     lines.push(`${this.config.prefix}_xoffbatt{upsname="${parsed.upsname}", hostname="${parsed.hostname}"} ${parsed.xoffbatt === 'N/A' ? 0 : this.parseDateTime(parsed.xoffbatt).valueOf()}`)
     // battdate: Moment<2021-12-11T00:00:00+00:00>,
     lines.push(`# HELP ${this.config.prefix}_battdate The date that batteries were last replaced.`)
@@ -251,15 +251,15 @@ export class ApcUpsImporter {
     lines.push(`${this.config.prefix}_battdate{upsname="${parsed.upsname}", hostname="${parsed.hostname}"} ${parsed.battdate.valueOf()}`)
     // nominv: { value: 230, unit: 'Volts' },
     lines.push(`# HELP ${this.config.prefix}_nominv The input voltage that the UPS is configured to expect.`)
-    lines.push(`# TYPE ${this.config.prefix}_nominv guage`)
+    lines.push(`# TYPE ${this.config.prefix}_nominv gauge`)
     lines.push(this.makeUnitLine('nominv', parsed.nominv, parsed.upsname, parsed.hostname))
     // nombattv: { value: 24, unit: 'Volts' },
     lines.push(`# HELP ${this.config.prefix}_nombattv The nominal battery voltage.`)
-    lines.push(`# TYPE ${this.config.prefix}_nombattv guage`)
+    lines.push(`# TYPE ${this.config.prefix}_nombattv gauge`)
     lines.push(this.makeUnitLine('nombattv', parsed.nombattv, parsed.upsname, parsed.hostname))
     // nompower: { value: 960, unit: 'Watts' },
     lines.push(`# HELP ${this.config.prefix}_nompower The maximum power in Watts that the UPS is designed to supply.`)
-    lines.push(`# TYPE ${this.config.prefix}_nompower guage`)
+    lines.push(`# TYPE ${this.config.prefix}_nompower gauge`)
     lines.push(this.makeUnitLine('nompower', parsed.nompower, parsed.upsname, parsed.hostname))
     // firmware: '963.g5 .I USB FW:g5'
     return lines.join("\n")
