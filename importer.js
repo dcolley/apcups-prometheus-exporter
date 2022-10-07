@@ -166,7 +166,8 @@ export class ApcUpsImporter {
   }
 
   makeUnitLine (key, value, upsname, hostname) {
-    return `${this.config.prefix}_${key}{unit="${value.unit}", upsname="${upsname}", hostname="${hostname}"} ${value.value}`
+    this.slog(`makeUnitLine: ${key}, ${JSON.stringify(value)}, ${upsname}, ${hostname}`)
+    return `${this.config.prefix}_${key}{unit="${value?.unit || 'none'}", upsname="${upsname}", hostname="${hostname}"} ${value?.value || 0}`
   }
 
   metrics (parsed) {
@@ -218,7 +219,7 @@ export class ApcUpsImporter {
     // lotrans: { value: 176, unit: 'Volts' },
     lines.push(`# HELP ${this.config.prefix}_lotrans The line voltage below which the UPS will switch to batteries.`)
     lines.push(`# TYPE ${this.config.prefix}_lotrans gauge`)
-    lines.push(this.makeUnitLine('maxtime', parsed._lotrans, parsed.upsname, parsed.hostname))
+    lines.push(this.makeUnitLine('lotrans', parsed.lotrans, parsed.upsname, parsed.hostname))
     // hitrans: { value: 288, unit: 'Volts' },
     lines.push(`# HELP ${this.config.prefix}_hitrans The line voltage below which the UPS will switch to mains.`)
     lines.push(`# TYPE ${this.config.prefix}_hitrans gauge`)
