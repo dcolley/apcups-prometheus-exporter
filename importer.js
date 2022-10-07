@@ -166,23 +166,23 @@ export class ApcUpsImporter {
   }
 
   makeUnitLine (key, value, upsname, hostname) {
-    return `${this.config.prefix}_${key}{unit: "${value.unit}", upsname: "${upsname}", hostname: "${hostname}"} ${value.value}`
+    return `${this.config.prefix}_${key}{unit="${value.unit}", upsname="${upsname}", hostname="${hostname}"} ${value.value}`
   }
 
   metrics (parsed) {
     var lines = []
     // date: Moment<2022-10-07T09:48:12Z>,
-    lines.push(`${this.config.prefix}_date{upsname: "${parsed.upsname}", hostname: "${parsed.hostname}"} ${parsed.date.valueOf()}`)
+    lines.push(`${this.config.prefix}_date{upsname="${parsed.upsname}", hostname="${parsed.hostname}"} ${parsed.date.valueOf()}`)
     // hostname: 'miner5',
     // upsname: 'miner5',
     // starttime: Moment<2022-10-07T08:18:29Z>,
     lines.push(`# HELP ${this.config.prefix}_starttime The time/date that apcupsd was started.`)
     lines.push(`# TYPE ${this.config.prefix}_starttime counter`)
-    lines.push(`${this.config.prefix}_starttime{upsname: "${parsed.upsname}", hostname: "${parsed.hostname}"} ${parsed.starttime.valueOf()}`)
+    lines.push(`${this.config.prefix}_starttime{upsname="${parsed.upsname}", hostname="${parsed.hostname}"} ${parsed.starttime.valueOf()}`)
     // status: 'ONLINE',
     lines.push(`# HELP ${this.config.prefix}_status The current status of the UPS (ONLINE, ONBATT, etc.)`)
     lines.push(`# TYPE ${this.config.prefix}_status guage`)
-    lines.push(`${this.config.prefix}_online{status: "${parsed.status}", upsname: "${parsed.upsname}", hostname: "${parsed.hostname}"} ${statusLookup[parsed.status]}`)
+    lines.push(`${this.config.prefix}_online{status="${parsed.status}", upsname="${parsed.upsname}", hostname="${parsed.hostname}"} ${statusLookup[parsed.status]}`)
     // linev: { value: 233, unit: 'Volts' },
     lines.push(`# HELP ${this.config.prefix}_linev The current line voltage as returned by the UPS.`)
     lines.push(`# TYPE ${this.config.prefix}_linev guage`)
@@ -214,7 +214,7 @@ export class ApcUpsImporter {
     // sense: 'Medium',
     lines.push(`# HELP ${this.config.prefix}_sense The sensitivity level of the UPS to line voltage fluctuations {Low: 0, Medium: 1, High: 2}.`)
     lines.push(`# TYPE ${this.config.prefix}_sense guage`)
-    lines.push(`${this.config.prefix}_sense{sensitivity: "${parsed.sense}", upsname: "${parsed.upsname}", hostname: "${parsed.hostname}"} ${sensitivityLookup[parsed.sense]}`)
+    lines.push(`${this.config.prefix}_sense{sensitivity="${parsed.sense}", upsname="${parsed.upsname}", hostname="${parsed.hostname}"} ${sensitivityLookup[parsed.sense]}`)
     // lotrans: { value: 176, unit: 'Volts' },
     lines.push(`# HELP ${this.config.prefix}_lotrans The line voltage below which the UPS will switch to batteries.`)
     lines.push(`# TYPE ${this.config.prefix}_lotrans guage`)
@@ -232,7 +232,7 @@ export class ApcUpsImporter {
     // numxfers: 0,
     lines.push(`# HELP ${this.config.prefix}_numxfers The number of transfers to batteries since apcupsd startup.`)
     lines.push(`# TYPE ${this.config.prefix}_numxfers counter`)
-    lines.push(`${this.config.prefix}_numxfers{reason: "${parsed.lastxfer}", upsname: "${parsed.upsname}", hostname: "${parsed.hostname}"} ${parsed.numxfers}`)
+    lines.push(`${this.config.prefix}_numxfers{reason="${parsed.lastxfer}", upsname="${parsed.upsname}", hostname="${parsed.hostname}"} ${parsed.numxfers}`)
     // tonbatt: { value: 0, unit: 'Seconds' },
     lines.push(`# HELP ${this.config.prefix}_tonbatt Time in seconds currently on batteries, or 0.`)
     lines.push(`# TYPE ${this.config.prefix}_tonbatt counter`)
@@ -244,11 +244,11 @@ export class ApcUpsImporter {
     // xoffbatt: 'N/A',
     lines.push(`# HELP ${this.config.prefix}_xoffbatt Time and date of last transfer from batteries, or 0='N/A'.`)
     lines.push(`# TYPE ${this.config.prefix}_xoffbatt guage`)
-    lines.push(`${this.config.prefix}_xoffbatt{upsname: "${parsed.upsname}", hostname: "${parsed.hostname}"} ${parsed.xoffbatt === 'N/A' ? 0 : this.parseDateTime(parsed.xoffbatt).valueOf()}`)
+    lines.push(`${this.config.prefix}_xoffbatt{upsname="${parsed.upsname}", hostname="${parsed.hostname}"} ${parsed.xoffbatt === 'N/A' ? 0 : this.parseDateTime(parsed.xoffbatt).valueOf()}`)
     // battdate: Moment<2021-12-11T00:00:00+00:00>,
     lines.push(`# HELP ${this.config.prefix}_battdate The date that batteries were last replaced.`)
     lines.push(`# TYPE ${this.config.prefix}_battdate counter`)
-    lines.push(`${this.config.prefix}_battdate{upsname: "${parsed.upsname}", hostname: "${parsed.hostname}"} ${parsed.battdate.valueOf()}`)
+    lines.push(`${this.config.prefix}_battdate{upsname="${parsed.upsname}", hostname="${parsed.hostname}"} ${parsed.battdate.valueOf()}`)
     // nominv: { value: 230, unit: 'Volts' },
     lines.push(`# HELP ${this.config.prefix}_nominv The input voltage that the UPS is configured to expect.`)
     lines.push(`# TYPE ${this.config.prefix}_nominv guage`)
