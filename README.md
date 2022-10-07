@@ -2,6 +2,10 @@
 
 Nodejs prometheus exporter for https://github.com/mapero/apcaccess
 
+# Dependencies
+
+Run http://www.apcupsd.org on a maching with a usb connection to the UPS.
+
 # Useage
 
 ```
