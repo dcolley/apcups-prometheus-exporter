@@ -1,0 +1,17 @@
+{
+  "name": "apc-ups-mon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "monitor.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apcaccess": "^1.1.2",
+    "express": "^4.18.1",
+    "moment-timezone": "^0.5.37"
+  }
+}
