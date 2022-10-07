@@ -12,6 +12,8 @@ npm install
 node exporter.js
 ```
 
+- Open browser http://localhost:3000/metrics
+
 # PM2
 
 - https://pm2.keymetrics.io/
