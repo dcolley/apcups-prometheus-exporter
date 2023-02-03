@@ -2,7 +2,7 @@
 
 Nodejs prometheus exporter for https://github.com/mapero/apcaccess
 
-# Switch to docker compose
+# Switch to docker
 
 ## docker build
 ```
@@ -23,7 +23,11 @@ docker run -it --rm --init -p 3000:3000 --name apcups-prometheus-exporter metasp
 docker compose build # still wip... 
 ```
 
-# Useage
+# Dependencies
+
+Run http://www.apcupsd.org on a maching with a usb connection to the UPS.
+
+# Useage via pm2
 
 ```
 git clone https://github.com/dcolley/apcups-prometheus-exporter
@@ -35,7 +39,7 @@ node exporter.js
 
 - Open browser http://localhost:3000/metrics
 
-# PM2
+## PM2
 
 - https://pm2.keymetrics.io/
 
