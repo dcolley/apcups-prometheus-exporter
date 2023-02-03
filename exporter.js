@@ -1,16 +1,24 @@
+import { ApcUpsImporter } from './importer.js'
+import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+dotenv.config()
+console.log(process.env)
+
 import express from 'express'
 const app = express()
-import { ApcUpsImporter } from './importer.js'
 
 // https://stackoverflow.com/questions/30585540/process-send-is-conditionally-defined-in-node-js
 process.send = process.send || function () {};
+process.on('SIGHUP', () => {
+  console.debug('\ncaught SIGHUP... exiting\n')
+  process.exit()
+})
 
 const PORT = 3000
 
 const config ={
-  hostname: '192.168.0.85',
-  port: 3551,
-  prefix: 'apc_ups'
+  hostname: process.env.UPS_HOST,
+  port: process.env.UPS_PORT,
+  prefix: process.env.PROM_PREFIX
 }
 
 let worker = new ApcUpsImporter(config)

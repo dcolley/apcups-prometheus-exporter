@@ -2,6 +2,27 @@
 
 Nodejs prometheus exporter for https://github.com/mapero/apcaccess
 
+# Switch to docker compose
+
+## docker build
+```
+docker build -t metaspan/apcups-prometheus-exporter \
+  --build-arg PORT=3000 \
+  --build-arg UPS_HOST=192.168.40.3 \
+  --build-arg UPS_PORT=3551 \
+  --build-arg PROM_PREFIX=apc_ups \
+  .
+docker image ls
+# test
+docker run -it --rm --init -p 3000:3000 --name apcups-prometheus-exporter metaspan/apcups-prometheus-exporter
+```
+
+## docker compose build
+
+```
+docker compose build # still wip... 
+```
+
 # Useage
 
 ```

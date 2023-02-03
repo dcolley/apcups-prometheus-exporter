@@ -1,0 +1,19 @@
+
+version: '3'
+
+services:
+  apcups-prometheus-exporter:
+    deploy:
+      replicas: 1
+    image: metaspan/apcups-prometheus-exporter:latest
+    # build:
+    #   context: .
+    #   tags:
+    #     - metaspan/apcups-prometheus-exporter
+    #   args:
+    #     # PORT: 3000 # always 3000, use ports below to redirect
+    #     UPS_HOST: 192.168.40.3
+    #     UPS_PORT: 3551
+    #     PROM_PREFIX: apc_ups
+    ports:
+      - "3002:3000"
